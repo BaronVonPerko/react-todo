@@ -4,9 +4,9 @@ var express     = require('express');
 var app         = express();
 var bodyParser  = require('body-parser');
 var mongoose    = require('mongoose');
-var Todo        = require('./app/models/todo');
-var List        = require('./app/models/list');
-var routes      = require('./app/routes');
+var Todo        = require('./models/todo');
+var List        = require('./models/list');
+var routes      = require('./routes');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
