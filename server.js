@@ -45,6 +45,36 @@ router.route('/todo')
         });
     });
 
+router.route('/todo/:todo_id')
+    .get((req, res) => {
+        Todo.findById(req.params.todo_id, (err, todo) => {
+            if(err) {
+                res.send(err);
+            }
+
+            res.json(todo);
+        });
+    })
+
+    .put((req, res) => {
+        Todo.findById(req.params.todo_id, (err, todo) => {
+            if(err) {
+                res.send(err);
+            }
+
+            todo.text = req.body.text;
+            todo.description = req.body.description;
+
+            todo.save((err) => {
+                if(err) {
+                    res.send(err);
+                }
+
+                res.json({message: 'Todo Updated'});
+            });
+        });
+    });
+
 app.use('/api', router);
 
 app.listen(port);
