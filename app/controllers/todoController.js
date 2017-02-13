@@ -20,18 +20,8 @@ todoController.post = (req, res) => {
     });
 };
 
-todoController.getAll = (req, res) => {
-    Todo.find((err, todos) => {
-        if(err) {
-            res.send(err);
-        }
-
-        res.json(todos);
-    });
-};
-
 todoController.get = (req, res) => {
-    Todo.findById(req.params.todo_id, (err, todo) => {
+    Todo.find({ _list: req.params.list_id }, (err, todo) => {
         if(err) {
             res.send(err);
         }

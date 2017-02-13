@@ -9,8 +9,7 @@ routes.post('/list', listController.post);
 routes.get('/list', listController.getAll);
 
 routes.post('/todo', todoController.post);
-routes.get('/todo', todoController.getAll);
-routes.get('/todo/:todo_id', todoController.get);
+routes.get('/todo/:list_id', todoController.get);
 routes.put('/todo/:todo_id', todoController.update);
 routes.delete('/todo/:todo_id', todoController.delete);
 
