@@ -8,9 +8,7 @@ todoController.post = (req, res) => {
     todo.text = req.body.text;
     todo.description = req.body.description;
     todo._list = req.body.list_id;
-
-    console.log(req.body);
-
+    
     todo.save((err) => {
         if(err) {
             res.send(err);
