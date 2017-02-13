@@ -73,6 +73,18 @@ router.route('/todo/:todo_id')
                 res.json({message: 'Todo Updated'});
             });
         });
+    })
+
+    .delete((req, res) => {
+        Todo.remove({
+            _id: req.params.todo_id
+        }, (err, todo) => {
+            if(err) {
+                res.send(err);
+            }
+
+            res.json({message: 'Deleted'});
+        });
     });
 
 app.use('/api', router);
