@@ -5,6 +5,8 @@ var app         = express();
 var bodyParser  = require('body-parser');
 var mongoose    = require('mongoose');
 var Todo        = require('./app/models/todo');
+var List        = require('./app/models/list');
+var routes      = require('./app/routes');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -15,79 +17,7 @@ var port = process.env.PORT || 8080;
 
 var router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({ message: 'API' });
-});
-
-router.route('/todo')
-    .post((req, res) => {
-        var todo = new Todo();
-
-        todo.text = req.body.text;
-        todo.description = req.body.description;
-
-        todo.save((err) => {
-            if(err) {
-                res.send(err);
-            }
-
-            res.json({message: 'Todo Created'});
-        });
-    })
-
-    .get((req, res) => {
-        Todo.find((err, todos) => {
-            if(err) {
-                res.send(err);
-            }
-
-            res.json(todos);
-        });
-    });
-
-router.route('/todo/:todo_id')
-    .get((req, res) => {
-        Todo.findById(req.params.todo_id, (err, todo) => {
-            if(err) {
-                res.send(err);
-            }
-
-            res.json(todo);
-        });
-    })
-
-    .put((req, res) => {
-        Todo.findById(req.params.todo_id, (err, todo) => {
-            if(err) {
-                res.send(err);
-            }
-
-            todo.text = req.body.text;
-            todo.description = req.body.description;
-
-            todo.save((err) => {
-                if(err) {
-                    res.send(err);
-                }
-
-                res.json({message: 'Todo Updated'});
-            });
-        });
-    })
-
-    .delete((req, res) => {
-        Todo.remove({
-            _id: req.params.todo_id
-        }, (err, todo) => {
-            if(err) {
-                res.send(err);
-            }
-
-            res.json({message: 'Deleted'});
-        });
-    });
-
-app.use('/api', router);
+app.use('/api', routes);
 
 app.listen(port);
 console.log('API running on port ' + port);
