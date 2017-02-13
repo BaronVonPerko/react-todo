@@ -6,6 +6,7 @@ var todoController = require('./controllers/todoController');
 const routes = express();
 
 routes.post('/list', listController.post);
+routes.get('/list', listController.getAll);
 
 routes.post('/todo', todoController.post);
 routes.get('/todo', todoController.getAll);

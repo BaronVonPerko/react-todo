@@ -6,7 +6,7 @@ var TodoSchema = new Schema({
     description: String,
     isComplete: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
-    list: { type: Schema.ObjectId, ref: 'List' }
+    _list: { type: Schema.Types.ObjectId, ref: 'List' }
 });
 
 module.exports = mongoose.model('Todo', TodoSchema);

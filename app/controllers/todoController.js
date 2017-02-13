@@ -9,6 +9,8 @@ todoController.post = (req, res) => {
     todo.description = req.body.description;
     todo._list = req.body.list_id;
 
+    console.log(req.body);
+
     todo.save((err) => {
         if(err) {
             res.send(err);
@@ -70,17 +72,3 @@ todoController.delete = (req, res) => {
 };
 
 module.exports = todoController;
-
-
-
-// router.route('/todo/:todo_id')
-//     .get((req, res) => {
-//         
-
-//     .put((req, res) => {
-
-//     })
-
-//     .delete((req, res) => {
-
-//     });

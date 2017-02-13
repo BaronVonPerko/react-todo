@@ -19,4 +19,14 @@ listController.post = (req, res) => {
     });
 };
 
+listController.getAll = (req, res) => {
+    List.find((err, list) => {
+        if(err) {
+            res.send(err);
+        }
+
+        res.json(list);
+    });
+}
+
 module.exports = listController;
