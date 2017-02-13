@@ -19,20 +19,31 @@ router.get('/', (req, res) => {
     res.json({ message: 'API' });
 });
 
-router.route('/todo').post((req, res) => {
-    var todo = new Todo();
-    
-    todo.text = req.body.text;
-    todo.description = req.body.description;
+router.route('/todo')
+    .post((req, res) => {
+        var todo = new Todo();
 
-    todo.save((err) => {
-        if(err) {
-            res.send(err);
-        }
+        todo.text = req.body.text;
+        todo.description = req.body.description;
 
-        res.json({message: 'Todo Created'});
+        todo.save((err) => {
+            if(err) {
+                res.send(err);
+            }
+
+            res.json({message: 'Todo Created'});
+        });
+    })
+
+    .get((req, res) => {
+        Todo.find((err, todos) => {
+            if(err) {
+                res.send(err);
+            }
+
+            res.json(todos);
+        });
     });
-});
 
 app.use('/api', router);
 
