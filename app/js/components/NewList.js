@@ -18,14 +18,17 @@ export default class NewList extends React.Component {
 
     submit = (event) => {
         event.preventDefault();
-        // todo 
+        this.props.submitNewList(this.state.newListName);
+        this.setState({
+            newListName: ''
+        });
     }
 
     render() {
         return (
             <div>
                 <h3>Create a new Todo List</h3>
-                <input type="text" placeholder="New List Name" value={this.newListName} onChange={this.changeName.bind(this)} />
+                <input type="text" placeholder="New List Name" value={this.state.newListName} onChange={this.changeName.bind(this)} />
                 <button onClick={this.submit.bind(this)}>Submit</button>
             </div>
         );
