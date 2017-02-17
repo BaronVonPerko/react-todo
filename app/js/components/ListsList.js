@@ -9,6 +9,8 @@ export default class ListsList extends React.Component {
         super(props);
 
         var self = this;
+
+        self.state = {noListMessage: ''};
         
         self.ajax = new AjaxService();
 
@@ -25,6 +27,7 @@ export default class ListsList extends React.Component {
         return (
             <div>
                 {this.props.lists}
+                {this.props.lists.length ? '' : <em>There are no lists available.  Please create one.</em>}
             </div>
         );
     }
