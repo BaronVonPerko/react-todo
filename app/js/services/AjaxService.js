@@ -4,9 +4,9 @@ import 'whatwg-fetch';
 
 export default class AjaxService {
 
-    ajaxPost = (body) => {
+    ajaxPost = (url, body) => {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:8080/api/list', {
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -18,6 +18,19 @@ export default class AjaxService {
         });        
     }
 
+    ajaxGet = (url) => {
+        return new Promise((resolve, reject) => {
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
+                resolve(res);
+            })
+        });
+    }
+
     createNewList = (newListName) => {
 
         const body = {
@@ -26,9 +39,21 @@ export default class AjaxService {
 
         return new Promise((resolve, reject) => {
             var svc = new AjaxService();
+            var url = 'http://localhost:8080/api/list';
 
-            svc.ajaxPost(body).then((res) => {
-                resolve(res);
+            svc.ajaxPost(url, body).then((res) => {
+                resolve(res.json());
+            });
+        });
+    }
+
+    getLists = () => {
+        return new Promise((resolve, reject) => {
+            var svc = new AjaxService();
+            var url = 'http://localhost:8080/api/list';
+
+            svc.ajaxGet(url).then((res) => {
+                resolve(res.json());
             });
         });
     }

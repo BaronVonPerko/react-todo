@@ -24,6 +24,8 @@ export default class NewList extends React.Component {
         event.preventDefault();
 
         this.ajax.createNewList(this.state.newListName).then((res) => {
+            console.log(res);
+            
             this.setState({
                 newListName: ''
             });
