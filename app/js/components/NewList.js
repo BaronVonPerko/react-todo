@@ -1,9 +1,13 @@
 import React from 'react';
 
+import AjaxService from './../services/AjaxService';
+
 
 export default class NewList extends React.Component {
     constructor(props) {
         super(props);
+
+        this.ajax = new AjaxService();
 
         this.state = {
             newListName: ''
@@ -18,10 +22,12 @@ export default class NewList extends React.Component {
 
     submit = (event) => {
         event.preventDefault();
-        this.props.submitNewList(this.state.newListName);
-        this.setState({
-            newListName: ''
-        });
+
+        this.ajax.createNewList(this.state.newListName).then((res) => {
+            this.setState({
+                newListName: ''
+            });
+        });        
     }
 
     render() {
