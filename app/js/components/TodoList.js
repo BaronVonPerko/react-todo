@@ -29,6 +29,10 @@ export default class TodoList extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
+        if(!this.state.newTodo.length) {
+            return;
+        }
+
         this.todoService.postTodo(this.state.newTodo, this.state.newDescription, this.props.listId).then((res) => {
             this.props.addTodo(res.data);
 
