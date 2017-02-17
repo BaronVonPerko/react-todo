@@ -1,4 +1,5 @@
 import React from 'react';
+import 'whatwg-fetch';
 
 import Footer from './Footer';
 import Header from './Header';
@@ -14,6 +15,18 @@ export default class Main extends React.Component {
 
     submitNewList(newListName) {
         console.log(newListName);
+
+        fetch('http://localhost:8080/api/list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: newListName
+            })
+        }).then((res) => {
+            console.log(res);
+        });
     }
 
     render() {

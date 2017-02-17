@@ -7,9 +7,11 @@ var mongoose    = require('mongoose');
 var Todo        = require('./models/todo');
 var List        = require('./models/list');
 var routes      = require('./routes');
+var cors        = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 mongoose.connect('mongodb://reactuser:password@ds151059.mlab.com:51059/react_todo');
 
