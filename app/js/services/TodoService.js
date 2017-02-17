@@ -16,11 +16,12 @@ export default class TodoService {
         });
     }
 
-    postTodo = (text, list_id) => {
+    postTodo = (text, description, list_id) => {
         return new Promise((resolve, reject) => {
             const url = 'http://localhost:8080/api/todo';
             const body = {
                 text,
+                description,
                 list_id
             };
 

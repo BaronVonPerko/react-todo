@@ -47,7 +47,7 @@ export default class Main extends React.Component {
     selectList = (selectedListId) => {
         this.todoService.getTodos(selectedListId).then((res) => {
             const dataList = res.map((data) => 
-                <TodoItem key={data._id} value={data.text} id={data._id} />
+                <TodoItem key={data._id} value={data.text} id={data._id} description={data.description} />
             );
 
             this.setState({
@@ -59,7 +59,7 @@ export default class Main extends React.Component {
 
     addTodo = (newTodo) => {
         var todos = this.state.selectedListTodos;
-        todos.push(<TodoItem key={newTodo._id} value={newTodo.text} id={newTodo._id} />);
+        todos.push(<TodoItem key={newTodo._id} value={newTodo.text} id={newTodo._id} description={newTodo.description} />);
 
         this.setState({
             selectedListTodos: todos
