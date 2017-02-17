@@ -35,7 +35,7 @@ export default class TodoList extends React.Component {
             <div>
                 {this.props.listId ? <div><input type="text" placeholder="New Todo" value={this.state.newTodo} onChange={this.changeName.bind(this)} /><button onClick={this.submit.bind(this)}>Submit</button></div> : ''}
 
-                {this.props.todos.length ? '' : <div><em>No todo items for this list.  Please add one.</em></div>}
+                {this.props.todos.length || !this.props.listId ? '' : <div><em>No todo items for this list.  Please add one.</em></div>}
             </div>
         );
     }
