@@ -50,6 +50,28 @@ todoController.update = (req, res) => {
     });
 };
 
+todoController.markDone = (req, res) => {
+    Todo.findById(req.body.todo_id, (err, todo) => {
+        if(err) {
+            res.send(err);
+            return;
+        }
+
+        todo.isComplete = true;
+        
+        todo.save().then((todo) => {
+            return res.status(200).json({
+                success: true,
+                data: todo
+            })
+        }).catch((err) => {
+            return res.status(500).json({
+                message: err
+            });
+        });
+    });
+}
+
 todoController.delete = (req, res) => {
     Todo.remove({
         _id: req.params.todo_id

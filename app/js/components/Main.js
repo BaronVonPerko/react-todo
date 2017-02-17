@@ -47,7 +47,7 @@ export default class Main extends React.Component {
     selectList = (selectedListId) => {
         this.todoService.getTodos(selectedListId).then((res) => {
             const dataList = res.map((data) => 
-                <TodoItem key={data._id} value={data.text} id={data._id} description={data.description} />
+                <TodoItem key={data._id} value={data.text} id={data._id} isComplete={data.isComplete} description={data.description} />
             );
 
             this.setState({

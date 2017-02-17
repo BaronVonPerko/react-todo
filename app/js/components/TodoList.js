@@ -38,7 +38,8 @@ export default class TodoList extends React.Component {
 
             this.setState({
                 newTodo: '',
-                newDescription: ''
+                newDescription: '',
+                isComplete: false
             });
         });
     };

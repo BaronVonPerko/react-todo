@@ -30,4 +30,17 @@ export default class TodoService {
             });
         });
     }
+
+    markAsDone = (todo_id) => {
+        return new Promise((resolve, reject) => {
+            const url = 'http://localhost:8080/api/todo/markDone';
+            const body = {
+                todo_id
+            };
+
+            this.ajax.ajaxPost(url, body).then((res) => {
+                resolve(res.json());
+            });
+        });
+    }
 }
