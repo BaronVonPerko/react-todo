@@ -14,7 +14,8 @@ export default class Main extends React.Component {
         var self = this;
 
         self.state = {
-            lists: []
+            lists: [],
+            selectedListId: null
         };
     }
 
@@ -27,9 +28,15 @@ export default class Main extends React.Component {
     addNewList = (newListName) => {
         var lists = this.state.lists;
         lists.push(<ListItem key={newListName} value={newListName} />);
-        
+
         this.setState({
             lists
+        });
+    }
+
+    selectList = (selectedListId) => {
+        this.setState({
+            selectedListId
         });
     }
 
@@ -37,8 +44,9 @@ export default class Main extends React.Component {
         return (
             <div>
                 <Header />
+                <p>Selected List: {this.state.selectedListId}</p>
                 <NewList addNewList={this.addNewList.bind(this)} />
-                <ListsList setLists={this.setLists.bind(this)} lists={this.state.lists} />
+                <ListsList selectList={this.selectList.bind(this)} setLists={this.setLists.bind(this)} lists={this.state.lists} />
                 <Footer />
             </div>
         );

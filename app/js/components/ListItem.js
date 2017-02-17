@@ -6,9 +6,13 @@ export default class ListItem extends React.Component {
         super(props);
     }
 
+    click = () => {
+        this.props.click(this.props.id);
+    }
+
     render() {
         return (
-            <div>{this.props.value}</div>
+            <div onClick={this.click}>{this.props.value}</div>
         );
     }
 }

@@ -16,11 +16,15 @@ export default class ListsList extends React.Component {
 
         self.ajax.getLists().then((res) => {
             const dataList = res.map((data) => 
-                <ListItem key={data.name} value={data.name} />
+                <ListItem key={data.name} value={data.name} id={data._id} click={self.selectList.bind(this)} />
             );
 
             self.props.setLists(dataList);
         });
+    }
+
+    selectList = (listId) => {
+        this.props.selectList(listId);
     }
 
     render() {
