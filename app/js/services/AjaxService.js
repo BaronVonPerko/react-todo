@@ -30,31 +30,4 @@ export default class AjaxService {
             })
         });
     }
-
-    createNewList = (newListName) => {
-
-        const body = {
-            name: newListName
-        }
-
-        return new Promise((resolve, reject) => {
-            var svc = new AjaxService();
-            var url = 'http://localhost:8080/api/list';
-
-            svc.ajaxPost(url, body).then((res) => {
-                resolve(res.json());
-            });
-        });
-    }
-
-    getLists = () => {
-        return new Promise((resolve, reject) => {
-            var svc = new AjaxService();
-            var url = 'http://localhost:8080/api/list';
-
-            svc.ajaxGet(url).then((res) => {
-                resolve(res.json());
-            });
-        });
-    }
 }

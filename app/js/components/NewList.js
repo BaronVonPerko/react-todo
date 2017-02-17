@@ -1,13 +1,13 @@
 import React from 'react';
 
-import AjaxService from './../services/AjaxService';
+import ListService from './../services/ListService';
 
 
 export default class NewList extends React.Component {
     constructor(props) {
         super(props);
 
-        this.ajax = new AjaxService();
+        this.listService = new ListService();
 
         this.state = {
             newListName: ''
@@ -23,8 +23,8 @@ export default class NewList extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        this.ajax.createNewList(this.state.newListName).then((res) => {
-            this.props.addNewList(this.state.newListName);
+        this.listService.createNewList(this.state.newListName).then((res) => {
+            this.props.addNewList(res.data);
             
             this.setState({
                 newListName: ''

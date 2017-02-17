@@ -25,9 +25,11 @@ export default class Main extends React.Component {
         });
     }
 
-    addNewList = (newListName) => {
+    addNewList = (newList) => {
         var lists = this.state.lists;
-        lists.push(<ListItem key={newListName} value={newListName} />);
+        lists.push(<ListItem key={newList.name} value={newList.name} id={newList._id} click={this.selectList.bind(this)} />);
+
+        this.selectList(newList._id);
 
         this.setState({
             lists

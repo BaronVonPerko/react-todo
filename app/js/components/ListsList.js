@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AjaxService from './../services/AjaxService';
+import ListService from './../services/ListService';
 
 import ListItem from './ListItem';
 
@@ -12,9 +12,9 @@ export default class ListsList extends React.Component {
 
         self.state = {noListMessage: ''};
         
-        self.ajax = new AjaxService();
+        self.listService = new ListService();
 
-        self.ajax.getLists().then((res) => {
+        self.listService.getLists().then((res) => {
             const dataList = res.map((data) => 
                 <ListItem key={data.name} value={data.name} id={data._id} click={self.selectList.bind(this)} />
             );
