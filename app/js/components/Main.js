@@ -5,6 +5,9 @@ import Header from './Header';
 import ListItem from './ListItem';
 import ListsList from './ListsList';
 import NewList from './NewList';
+import TodoList from './TodoList';
+
+import TodoService from './../services/TodoService';
 
 
 export default class Main extends React.Component {
@@ -13,9 +16,12 @@ export default class Main extends React.Component {
 
         var self = this;
 
+        self.todoService = new TodoService();
+
         self.state = {
             lists: [],
-            selectedListId: null
+            selectedListId: null,
+            selectedListTodos: []
         };
     }
 
@@ -37,8 +43,11 @@ export default class Main extends React.Component {
     }
 
     selectList = (selectedListId) => {
-        this.setState({
-            selectedListId
+        this.todoService.getTodos(selectedListId).then((res) => {
+            this.setState({
+                selectedListId,
+                selectedListTodos: res
+            });
         });
     }
 
@@ -49,6 +58,9 @@ export default class Main extends React.Component {
                 <p>Selected List: {this.state.selectedListId}</p>
                 <NewList addNewList={this.addNewList.bind(this)} />
                 <ListsList selectList={this.selectList.bind(this)} setLists={this.setLists.bind(this)} lists={this.state.lists} />
+                <hr/>
+                <TodoList todos={this.state.selectedListTodos} listId={this.state.selectedListId} />
+                <hr />
                 <Footer />
             </div>
         );

@@ -1,0 +1,42 @@
+import React from 'react';
+
+import TodoService from './../services/TodoService';
+
+export default class TodoList extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.todoService = new TodoService();
+
+        this.state = {
+            newTodo: ''
+        }
+    }
+
+    changeName = (event) => {
+        this.setState({
+            newTodo: event.target.value
+        });
+    };
+
+    submit = (event) => {
+        event.preventDefault();
+
+        this.todoService.postTodo(this.state.newTodo, this.props.listId).then((res) => {
+            console.log(res);
+            this.setState({
+                newTodo: ''
+            });
+        });
+    };
+
+    render() {
+        return (
+            <div>
+                {this.props.listId ? <div><input type="text" placeholder="New Todo" value={this.state.newTodo} onChange={this.changeName.bind(this)} /><button onClick={this.submit.bind(this)}>Submit</button></div> : ''}
+
+                {this.props.todos.length ? '' : <div><em>No todo items for this list.  Please add one.</em></div>}
+            </div>
+        );
+    }
+}
