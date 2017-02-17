@@ -9,12 +9,15 @@ todoController.post = (req, res) => {
     todo.description = req.body.description;
     todo._list = req.body.list_id;
     
-    todo.save((err) => {
-        if(err) {
-            res.send(err);
-        }
-
-        res.json({message: 'Todo Created'});
+    todo.save().then((newTodo) => {
+        return res.status(200).json({
+            success: true,
+            data: newTodo
+        })
+    }).catch((err) => {
+        return res.status(500).json({
+            message: err
+        });
     });
 };
 

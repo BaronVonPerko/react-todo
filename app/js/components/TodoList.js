@@ -23,6 +23,8 @@ export default class TodoList extends React.Component {
         event.preventDefault();
 
         this.todoService.postTodo(this.state.newTodo, this.props.listId).then((res) => {
+            this.props.addTodo(res.data);
+
             this.setState({
                 newTodo: ''
             });

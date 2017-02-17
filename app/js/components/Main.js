@@ -35,7 +35,7 @@ export default class Main extends React.Component {
 
     addNewList = (newList) => {
         var lists = this.state.lists;
-        lists.push(<ListItem key={newList.name} value={newList.name} id={newList._id} click={this.selectList.bind(this)} />);
+        lists.push(<ListItem key={newList._id} value={newList.name} id={newList._id} click={this.selectList.bind(this)} />);
 
         this.selectList(newList._id);
 
@@ -46,16 +46,23 @@ export default class Main extends React.Component {
 
     selectList = (selectedListId) => {
         this.todoService.getTodos(selectedListId).then((res) => {
-            console.log(res);
-
             const dataList = res.map((data) => 
-                <TodoItem key={data.text} value={data.text} id={data._id} />
+                <TodoItem key={data._id} value={data.text} id={data._id} />
             );
 
             this.setState({
                 selectedListId,
                 selectedListTodos: dataList
             });
+        });
+    }
+
+    addTodo = (newTodo) => {
+        var todos = this.state.selectedListTodos;
+        todos.push(<TodoItem key={newTodo._id} value={newTodo.text} id={newTodo._id} />);
+
+        this.setState({
+            selectedListTodos: todos
         });
     }
 
@@ -77,7 +84,8 @@ export default class Main extends React.Component {
 
                 <TodoList 
                     todos={this.state.selectedListTodos} 
-                    listId={this.state.selectedListId} />
+                    listId={this.state.selectedListId} 
+                    addTodo={this.addTodo.bind(this)} />
 
                 <hr />
 
