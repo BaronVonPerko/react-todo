@@ -10,7 +10,7 @@ export default class TodoList extends React.Component {
 
         this.state = {
             newTodo: ''
-        }
+        }     
     }
 
     changeName = (event) => {
@@ -23,7 +23,6 @@ export default class TodoList extends React.Component {
         event.preventDefault();
 
         this.todoService.postTodo(this.state.newTodo, this.props.listId).then((res) => {
-            console.log(res);
             this.setState({
                 newTodo: ''
             });
@@ -36,6 +35,8 @@ export default class TodoList extends React.Component {
                 {this.props.listId ? <div><input type="text" placeholder="New Todo" value={this.state.newTodo} onChange={this.changeName.bind(this)} /><button onClick={this.submit.bind(this)}>Submit</button></div> : ''}
 
                 {this.props.todos.length || !this.props.listId ? '' : <div><em>No todo items for this list.  Please add one.</em></div>}
+
+                {this.props.todos}
             </div>
         );
     }
