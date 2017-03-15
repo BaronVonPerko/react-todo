@@ -27,8 +27,14 @@ export default class TodoItem extends React.Component {
         return (
             <li>
                 {this.props.value}
-                {this.props.description && this.props.description.length ? <em> - this.props.description</em> : ''}
-                {this.state.isComplete ? '' : <button onClick={this.markDone.bind(this)}>Mark Done</button>}
+                { this.props.description && this.props.description.length 
+                    ? <em> - {this.props.description} </em> 
+                    : ''
+                }
+                { this.state.isComplete 
+                    ? '' 
+                    : <button onClick={this.markDone.bind(this)}>Mark Done</button>
+                }
             </li>
         );
     }
