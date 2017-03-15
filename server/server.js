@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect('mongodb://reactuser:password@ds151059.mlab.com:51059/react_todo');
+mongoose.connect('mongodb://127.0.0.1:27017/react_todo');
 
 var port = process.env.PORT || 8080;
 
